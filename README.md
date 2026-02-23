@@ -30,6 +30,19 @@
 
 ---
 
+## Features
+
+- **Backfill + Incremental** — Full initial import of your entire watch history, followed by overlap-based syncing.
+- **Reconciliation** — Catches Trakt hard deletes and rewrites affected raw ranges to maintain accuracy.
+- **Smart Deduplication** — Persistent SQLite state keyed by Trakt `history_id` ensures no duplicated events.
+- **Daily Metrics** — Rebuilds `all`, `movie`, and `episode` daily aggregates automatically.
+- **OAuth Bootstrap** — Supports device flow, auth code, or a pre-seeded refresh token.
+- **Docker Ready** — Compose-friendly setup with distinct `/data` and `/config` volumes.
+- **CLI Modes** — Run one-time jobs with `--once` or test without database writes using `--no-influx`.
+- **Resilient Client** — Built-in retries, rate-limit handling, token rotation, and dead-letter queues.
+
+---
+
 ## How It Works
 
 Trakt Tracker extracts your movie and episode watch history from Trakt and stores it in InfluxDB, enabling you to build detailed dashboards of your viewing habits. It handles both full initial backfills and recurring incremental syncs.
@@ -87,19 +100,6 @@ flowchart TD
     L --> M["Fetch rolling window → Handle hard deletes → Rebuild daily"]
     M --> I
 ```
-
----
-
-## Features
-
-- **Backfill + Incremental** — Full initial import of your entire watch history, followed by overlap-based syncing.
-- **Reconciliation** — Catches Trakt hard deletes and rewrites affected raw ranges to maintain accuracy.
-- **Smart Deduplication** — Persistent SQLite state keyed by Trakt `history_id` ensures no duplicated events.
-- **Daily Metrics** — Rebuilds `all`, `movie`, and `episode` daily aggregates automatically.
-- **OAuth Bootstrap** — Supports device flow, auth code, or a pre-seeded refresh token.
-- **Docker Ready** — Compose-friendly setup with distinct `/data` and `/config` volumes.
-- **CLI Modes** — Run one-time jobs with `--once` or test without database writes using `--no-influx`.
-- **Resilient Client** — Built-in retries, rate-limit handling, token rotation, and dead-letter queues.
 
 ---
 
