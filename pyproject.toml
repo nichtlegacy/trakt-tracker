@@ -1,0 +1,34 @@
+[project]
+name = "trakt-influx-tracker"
+version = "1.0.0"
+description = "Sync Trakt watch history into InfluxDB 2.x for quantified-self analytics"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "apscheduler>=3.10.4,<4",
+  "httpx>=0.27.0,<1",
+  "influxdb-client>=1.43.0,<2",
+  "python-dotenv>=1.0.1,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0,<9",
+]
+
+[project.scripts]
+trakt-tracker = "trakt_tracker.main:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

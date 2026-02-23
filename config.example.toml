@@ -1,0 +1,28 @@
+# Operational defaults for scheduler/runtime.
+# Keep secrets (client secret, influx token) in ENV where possible.
+
+[trakt]
+client_id = ""
+client_secret = ""
+
+[influx]
+enabled = true
+url = "http://localhost:8086"
+token = ""
+org = ""
+bucket_raw = "trakt_raw"
+bucket_agg = "trakt_agg"
+
+[sync]
+sync_cron = "0 6,18 * * *"
+reconcile_cron = "30 3 * * *"
+timezone = "Europe/Berlin"
+overlap_hours = 24
+reconcile_days = 7
+
+[runtime]
+state_db_path = "/data/state.db"
+log_level = "INFO"
+trakt_max_retries = 5
+trakt_retry_after_margin = 0.9
+trakt_min_request_interval_seconds = 0.0

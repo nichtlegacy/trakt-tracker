@@ -1,0 +1,19 @@
+services:
+  trakt-tracker:
+    container_name: trakt-tracker
+    image: ghcr.io/nichtlegacy/trakt-tracker:latest
+    environment:
+      RUNNING_IN_DOCKER: "true"
+      TRAKT_CLIENT_ID: "${TRAKT_CLIENT_ID:-}"
+      TRAKT_CLIENT_SECRET: "${TRAKT_CLIENT_SECRET:-}"
+      ENABLE_INFLUX: "${ENABLE_INFLUX:-true}"
+      INFLUX_URL: "${INFLUX_URL:-}"
+      INFLUX_TOKEN: "${INFLUX_TOKEN:-}"
+      INFLUX_ORG: "${INFLUX_ORG:-}"
+      INFLUX_BUCKET_RAW: "${INFLUX_BUCKET_RAW:-trakt_raw}"
+      INFLUX_BUCKET_AGG: "${INFLUX_BUCKET_AGG:-trakt_agg}"
+    init: true
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+      - ./config:/config
